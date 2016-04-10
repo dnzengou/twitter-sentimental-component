@@ -1,0 +1,140 @@
+<html>
+<head>
+    <title></title>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <style type="text/css">
+        ul {
+            overflow-y: auto;
+        }
+
+        li {
+            border: 1px solid green;
+            padding: 10;
+            list-style-type: none;
+        }
+
+        /*cards ui*/
+        @import 'http://fonts.googleapis.com/css?family=Lily+Script+One';
+        body {
+            background: #eee;
+            font-family: 'Lily Script One';
+        }
+
+        .cards {
+            display: inline-block;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            float: left;
+            perspective: 500px;
+        }
+
+        .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+            transition: transform 1s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover .content {
+            transform: rotateY(180deg);
+            transition: transform 0.5s;
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            height: 100%;
+            width: 99%;
+            background: white;
+            line-height: 50px;
+            color: #03446A;
+            text-align: center;
+            font-size: 36px;
+            border-radius: 5px;
+            backface-visibility: hidden;
+        }
+
+        .back {
+            background: #03446A;
+            color: white;
+            transform: rotateY(180deg);
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var $container = $('ul.items'),
+                    socket = io.connect('http://localhost:3000');
+
+            var keywords = [];
+
+            socket.on('keywords', function (keyword) {
+                var keyid = keyword.replace(/ /g, "_");
+                if (keywords.indexOf(keyid) < 0) {
+                    keywords.push(keyid);
+                    $('.cards').append('<div class="card" id="' + keyid.trim() + '">' +
+                    '<div class="content">' +
+                    '<div class="front">' + keyword + '</div>' +
+                    '<div class="back">' + 0 + '</div>' +
+                    '</div>' +
+                    '</div>');
+                }
+
+            });
+
+            socket.on('twitter', function (data) {
+                console.debug(data);
+                var keyid = data.keyword.replace(/ /g, "_");
+                if (keywords.indexOf(keyid) < 0) {
+                    keywords.push(keyid);
+                    $('.cards').append('<div class="card" id="' + keyid.trim() + '">' +
+                    '<div class="content">' +
+                    '<div class="front">' + data.keyword + '</div>' +
+                    '<div class="back">' + data.tweetTotalSentiment + '</div>' +
+                    '</div>' +
+                    '</div>');
+                } else {
+                    $('#' + keyid + ' .content .back').text(data.tweetTotalSentiment);
+                }
+
+
+                $('.items').prepend('<li>' + data.text + '</li>');
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+<div class="cards">
+    <!--<div class="card">
+        <div class="content">
+            <div class="front">
+                Front
+            </div>
+            <div class="back">
+                Back!
+            </div>
+        </div>
+    </div>-->
+</div>
+<div id="rootContainer">
+
+
+    <ul class="items">
+
+    </ul>
+
+</div>
+
+</body>
+</html>
+

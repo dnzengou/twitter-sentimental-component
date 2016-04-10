@@ -1,0 +1,33 @@
+{
+  "name": "twitter-sentimental-component",
+  "version": "0.0.1",
+  "author": "Zeeshan Hassan Memon",
+  "description": "node component for twitter sentimental streaming component",
+  "keywords": [
+    "twitter",
+    "stream",
+    "sentimental",
+    "sentiment",
+    "aggregation",
+    "twitter-api",
+    "websocket",
+    "events",
+    "socket"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zishon89us/twitter-sentimental-component"
+  },
+  "readmeFilename": "Readme.md",
+  "main": "server.js",
+  "license": "The MIT License (MIT)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "q": "^1.4.1",
+    "sentiment": "^1.0.6",
+    "socket.io": "1.0.6",
+    "twit": "^2.2.3"
+  }
+}
