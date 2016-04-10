@@ -82,7 +82,7 @@
                     keywords.push(keyid);
                     $('.cards').append('<div class="card" id="' + keyid.trim() + '">' +
                     '<div class="content">' +
-                    '<div class="front">' + keyword + '</div>' +
+                    '<div class="front">' + keyword + '<div class="frontTotalSentiment"> 0 </div><div class="frontTweetCount">  0  </div></div>' +
                     '<div class="back">' + 0 + '</div>' +
                     '</div>' +
                     '</div>');
@@ -98,11 +98,16 @@
                     $('.cards').append('<div class="card" id="' + keyid.trim() + '">' +
                     '<div class="content">' +
                     '<div class="front">' + data.keyword + '</div>' +
+                    '<div class="frontTotalSentiment">' + data.tweetTotalSentiment +
+                    '<div class="frontTweetCount">' + data.tweetCount + '</div>' +
                     '<div class="back">' + data.tweetTotalSentiment + '</div>' +
+                    '</div>'+
                     '</div>' +
                     '</div>');
                 } else {
                     $('#' + keyid + ' .content .back').text(data.tweetTotalSentiment);
+                    $('#' + keyid + ' .content .frontTotalSentiment').text(data.tweetTotalSentiment);
+                    $('#' + keyid + ' .content .frontTweetCount').text(data.tweetCount);
                 }
 
 
