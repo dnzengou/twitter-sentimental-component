@@ -2,7 +2,11 @@
 
 ##What is inside
 
-Dashboard shows Cards with keyword Sentimental Value and Total Tweet Count.
+Dashboard shows Multiple Cards with the keywords and sentimental count value and total tweet count respectively. For example 'Kylie Jenner' is keyword it will public streaming about it and will also keep record of sentimental number i.e. -5 to +5. This way it makes it easy to analyze about something.
+
+##What is special
+
+It handles multiple streams i.e if keywords file has n different comma separated values it will open n streams.
 
 ##How to run app
 
